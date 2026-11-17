@@ -1,0 +1,6 @@
+{
+  "name": "SparkQuest Lab",
+  "description": "Interactive STEM storytelling adventures and programming logic puzzles for kids ages 8 to 10.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
