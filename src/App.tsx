@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { AdventureMap } from './components/AdventureMap';
 import { ConceptLabsHub } from './components/ConceptLabsHub';
 import { FieldGuideView } from './components/FieldGuideView';
+import { OwnerModal } from './components/OwnerModal';
 import { PuzzleWorkspace } from './components/PuzzleWorkspace';
 import { SandboxBuilder } from './components/SandboxBuilder';
 import { StoryView } from './components/StoryView';
@@ -43,6 +44,7 @@ type AppView =
 export default function App() {
   const [progress, setProgress] = useState<SavedProgress>(() => loadProgress());
   const [view, setView] = useState<AppView>({ type: 'MAP' });
+  const [ownerModalOpen, setOwnerModalOpen] = useState(false);
 
   useEffect(() => {
     sound.enabled = progress.soundEnabled;
@@ -157,6 +159,16 @@ export default function App() {
             >
               Field Guide
             </button>
+            <button
+              type="button"
+              onClick={() => {
+                sound.click();
+                setOwnerModalOpen(true);
+              }}
+              className="text-sky-700 hover:text-sky-900 hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0 font-semibold cursor-pointer"
+            >
+              Made By Hareem
+            </button>
           </nav>
 
           {/* Zone 3: 1 primary action */}
@@ -208,6 +220,16 @@ export default function App() {
             }`}
           >
             Guide
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              sound.click();
+              setOwnerModalOpen(true);
+            }}
+            className="px-2 py-1 text-sky-700 font-semibold whitespace-nowrap"
+          >
+            Made By Hareem
           </button>
         </nav>
       </header>
@@ -286,7 +308,20 @@ export default function App() {
       {/* Quiet Footer */}
       <footer className="border-t border-slate-200 bg-white mt-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
-          <span>SparkQuest Lab · STEM Stories &amp; Coding Logic for Ages 8–10</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span>SparkQuest Lab · STEM Stories &amp; Coding Logic for Ages 8–10</span>
+            <span aria-hidden="true">·</span>
+            <button
+              type="button"
+              onClick={() => {
+                sound.click();
+                setOwnerModalOpen(true);
+              }}
+              className="font-semibold text-sky-700 hover:text-sky-900 hover:underline cursor-pointer"
+            >
+              Made By Hareem
+            </button>
+          </div>
           <div className="flex items-center gap-4">
             <button
               type="button"
@@ -308,6 +343,8 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      <OwnerModal open={ownerModalOpen} onClose={() => setOwnerModalOpen(false)} />
     </div>
   );
 }
